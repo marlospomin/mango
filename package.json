@@ -1,0 +1,19 @@
+{
+  "name": "mango-js",
+  "version": "1.0.0",
+  "description": "A simple zooming javascript library with no dependencies.",
+  "main": "src/mango.js",
+  "repository": "marlospomin/mango",
+  "author": "Marlos Pomin",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "mocha": "^4.0.1"
+  }
+}
