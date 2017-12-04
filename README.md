@@ -8,8 +8,6 @@
 
 ## Configuring
 
-## Todo List
-
 ## Contributing
 
 ## License
