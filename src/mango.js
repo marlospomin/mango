@@ -55,7 +55,8 @@ export default function (selector = '[data-mango]', config = {}) {
       // Trigger zoom-in
       zoom(origin)
     } else {
-      // zoom-out
+      // Zoom out
+      zoom(origin).out()
     }
   }
 
@@ -70,6 +71,8 @@ export default function (selector = '[data-mango]', config = {}) {
     const zoomed = clone(origin)
     // Apply the overlay
     document.body.appendChild(wrapper)
+    // Apply the clone
+    document.body.appendChild(zoomed)
     // Request animation event
     requestAnimationFrame(() => {
       document.body.classList.add('mango--open')
@@ -87,15 +90,40 @@ export default function (selector = '[data-mango]', config = {}) {
       zoomed.removeEventListener('transitioned')
     })
     // Animate transitions
-    animate()
+    animate(origin, zoomed)
     // Zoom out function
     function out() {
       console.log('hello')
     }
   }
 
-  function animate() {
-
+  function animate(origin, zoomed) {
+    // Create a container
+    const container = {
+      width: window.innerWidth, height: window.innerHeight,
+      left: 0, top: 0, right: 0, bottom: 0
+    }
+    // Set viewport vars
+    let viewportWidth = viewportWidth || container.width - 5 * 2
+    let viewportHeight = viewportHeight || container.height - 5 * 2
+    // Set the zoom target
+    const zoomTarget = origin
+    // Save computed information
+    const { naturalWidth = viewportWidth,
+       naturalHeight = viewportHeight } = zoomTarget
+    const { top, left, width, height } = zoomTarget.getBoundingClientRect()
+    // Set scales
+    const scaleX = Math.min(naturalWidth, viewportWidth) / width
+    const scaleY = Math.min(naturalHeight, viewportHeight) / height
+    // Set scale
+    const scale = Math.min(scaleX, scaleY) || 1
+    // Set transform values
+    const translateX = (-left + (viewportWidth - width) / 2 + 5 + container.left) / scale
+    const translateY = (-top + (viewportHeight - height) / 2 + 5 + container.top) / scale
+    // Transform
+    const transform = `scale(${scale}) translate3d(${translateX}px, ${translateY}px, 0)`
+    // Style element
+    zoomed.style.transform = transform
   }
 
   function run(images) {
