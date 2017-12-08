@@ -1,0 +1,25 @@
+.mango-overlay {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mango-image--open {
+  position: relative;
+  cursor: zoom-out;
+}
+
+.mango--open .mango-overlay {
+  cursor: zoom-out;
+  opacity: 1;
+}
+
+.mango-image {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
