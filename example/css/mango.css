@@ -11,7 +11,7 @@
 
 .mango-image--open {
   position: relative;
-  cursor: zoom-out;
+  cursor: zoom-out !important;
 }
 
 .mango--open .mango-overlay {

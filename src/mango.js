@@ -1,5 +1,12 @@
-const defaultConfig = {
-}
+// Add default config
+// Fix z-index issues
+// Wrap image into wrapper
+// Refactor animate
+// Refactor out
+// Refactor event listeners
+// Refactor comments
+
+const defaultConfig = { /* Empty for now */}
 
 export default function (selector = '[data-mango]', config = {}) {
   // Push default into config
@@ -81,19 +88,83 @@ export default function (selector = '[data-mango]', config = {}) {
     origin.style.visibility = 'hidden'
     // Set styles for the zoomed image
     zoomed.classList.add('mango-image--open')
-    // Add zoom-out events
-    zoomed.addEventListener('click', out())
-    zoomed.addEventListener('transitioned', () => {
+    // Remove handler
+    let remove = function remove() {
       // Set control var
-      isAnimating = false
+      isAnimating = true
+      // Add zoom-out events
+      zoomed.addEventListener('click', () => {
+        isAnimating = false
+        out()
+      })
+      window.addEventListener('resize', () => {
+        isAnimating = false
+        out()
+      })
+      wrapper.addEventListener('click', () => {
+        isAnimating = false
+        out()
+      })
       // Remove itself
-      zoomed.removeEventListener('transitioned')
-    })
+      zoomed.removeEventListener('transitionend', remove)
+    }
+    // Keydown handler
+    const keydown = function remove() {
+      if ([27].includes(event.keyCode)) {
+        isAnimating = false
+        out()
+      }
+    }
+    // Scroll handler
+    const scroll = function remove() {
+      // Save current scroll
+      const currentScroll = window.pageYOffset || 0
+      // If scrolled more than 50px zoom out
+      if (Math.abs(scrollTop - currentScroll) > 50) {
+        isAnimating = false
+        out(150)
+      }
+    }
+    // Add event listeners
+    zoomed.addEventListener('transitionend', remove)
+    document.addEventListener('keydown', keydown)
+    document.addEventListener('scroll', scroll)
     // Animate transitions
     animate(origin, zoomed)
     // Zoom out function
-    function out() {
-      console.log('hello')
+    function out(timeout = 0) {
+      // If timeout is more than 0 time it out else zoom out
+      timeout > 0 ? setTimeout(run, timeout) : run()
+
+      function run() {
+        // If we are animating break -- Failing here
+        if (isAnimating) return
+        // Set animation var
+        isAnimating = true
+        // Remove class from body
+        document.body.classList.remove('mango--open')
+        // De transform the element
+        zoomed.style.transform = 'none'
+        // Remove event listener from click
+        zoomed.removeEventListener('click', out())
+        // Remove handler
+        remove = function remove() {
+          // Set visibility of the original image
+          origin.style.visibility = 'visible'
+          // Remove the fake element
+          document.body.removeChild(zoomed)
+          // Remove the wrapper
+          document.body.removeChild(wrapper)
+          // Remove classes
+          zoomed.classList.remove('mango-image--open')
+          // Set animation var
+          isAnimating = false
+          // Remove event itself
+          zoomed.removeEventListener('transitionend', remove)
+        }
+        // Add animations to zoom out
+        zoomed.addEventListener('transitionend', remove)
+      }
     }
   }
 
