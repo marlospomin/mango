@@ -99,7 +99,7 @@ export default function (selector = '[data-mango]', config = {}) {
       })
       window.addEventListener('resize', () => {
         isAnimating = false
-        out()
+        out(20)
       })
       wrapper.addEventListener('click', () => {
         isAnimating = false
@@ -110,7 +110,7 @@ export default function (selector = '[data-mango]', config = {}) {
     }
     // Keydown handler
     const keydown = function remove() {
-      if ([27].includes(event.keyCode)) {
+      if ([27, 37, 39].includes(event.keyCode)) {
         isAnimating = false
         out()
       }
