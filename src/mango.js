@@ -63,7 +63,7 @@ export default function (selector = '[data-mango]', config = {}) {
       zoom(origin)
     } else {
       // Zoom out
-      zoom(origin).out()
+      zoom(origin).out(150)
     }
   }
 
@@ -80,6 +80,10 @@ export default function (selector = '[data-mango]', config = {}) {
     document.body.appendChild(wrapper)
     // Apply the clone
     document.body.appendChild(zoomed)
+
+    // zoomed.parentNode.insertBefore(wrapper, zoomed)
+    // wrapper.appendChild(zoomed)
+
     // Request animation event
     requestAnimationFrame(() => {
       document.body.classList.add('mango--open')
@@ -152,9 +156,11 @@ export default function (selector = '[data-mango]', config = {}) {
           // Set visibility of the original image
           origin.style.visibility = 'visible'
           // Remove the fake element
-          document.body.removeChild(zoomed)
+          // document.body.removeChild(zoomed)
+          zoomed.remove()
           // Remove the wrapper
-          document.body.removeChild(wrapper)
+          // document.body.removeChild(wrapper)
+          wrapper.remove()
           // Remove classes
           zoomed.classList.remove('mango-image--open')
           // Set animation var
@@ -199,7 +205,7 @@ export default function (selector = '[data-mango]', config = {}) {
 
   function run(images) {
     // For each image in the collection run mango upon click
-    images.forEach(image => {
+    Array.from(images).forEach(image => {
       // Add styles to each image
       image.classList.add('mango-image')
       // Trigger the zoom effect
