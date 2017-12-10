@@ -81,7 +81,7 @@
         zoom(_origin);
       } else {
         // Zoom out
-        zoom(origin).out();
+        zoom(origin).out(150);
       }
     }
 
@@ -98,6 +98,10 @@
       document.body.appendChild(wrapper);
       // Apply the clone
       document.body.appendChild(zoomed);
+
+      // zoomed.parentNode.insertBefore(wrapper, zoomed)
+      // wrapper.appendChild(zoomed)
+
       // Request animation event
       requestAnimationFrame(function () {
         document.body.classList.add('mango--open');
@@ -172,9 +176,11 @@
             // Set visibility of the original image
             origin.style.visibility = 'visible';
             // Remove the fake element
-            document.body.removeChild(zoomed);
+            // document.body.removeChild(zoomed)
+            zoomed.remove();
             // Remove the wrapper
-            document.body.removeChild(wrapper);
+            // document.body.removeChild(wrapper)
+            wrapper.remove();
             // Remove classes
             zoomed.classList.remove('mango-image--open');
             // Set animation var
@@ -227,7 +233,7 @@
 
     function run(images) {
       // For each image in the collection run mango upon click
-      images.forEach(function (image) {
+      Array.from(images).forEach(function (image) {
         // Add styles to each image
         image.classList.add('mango-image');
         // Trigger the zoom effect
