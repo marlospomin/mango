@@ -1,11 +1,28 @@
 {
   "name": "mango-js",
-  "version": "1.0.0",
   "description": "A small medium like javascript library to zoom your images.",
-  "repository": "marlospomin/mango",
+  "version": "1.0.0",
   "author": "Marlos Pomin",
+  "files": [
+    "dist/"
+  ],
+  "keywords": [
+    "zoom",
+    "zooming",
+    "javascript",
+    "medium",
+    "like",
+    "simple",
+    "small"
+  ],
   "license": "MIT",
-  "private": true,
+  "main": "dist/mango.js",
+  "repository": "marlospomin/mango",
+  "scripts": {
+    "gulp": "gulp",
+    "build": "gulp build",
+    "reload": "gulp reload"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
