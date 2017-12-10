@@ -1,11 +1,11 @@
 .mango-overlay {
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
   opacity: 0;
+  height: 100%;
+  width: 100%;
   transition: opacity 0.3s ease;
 }
 
