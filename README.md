@@ -38,6 +38,12 @@ Add ```data-mango``` to your images as it follows below.
 <img data-mango src="http://example.com" alt="">...</img>
 ```
 
+Add mango ```css``` to your document.
+
+``` html
+<link rel="stylesheet" href="/path/to/file/mango.css">
+```
+
 Call mango anywhere in your code:
 
 ``` js
