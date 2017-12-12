@@ -1,10 +1,20 @@
-// Add default config
-// Fix z-index issues
-// Wrap image into wrapper
-// Refactor animate
-// Refactor out
-// Refactor event listeners
-// Refactor comments
+/*
+
+-Refactor Notes-
+
+Add margin options.
+Add data-src image.
+Add default config options.
+Make selected images to only support an image tag.
+Remove useless comments.
+Move contants to the top.
+Refactor zoom() function.
+Refactor event listeners incl. their handlers.
+Fix isAnimating variable.
+Refactor animate() into methods and rename to calculate.
+Rename fakeElement.
+
+*/
 
 const defaultConfig = { /* Empty for now */}
 
