@@ -5,6 +5,7 @@
 Add margin options.
 Add data-src image.
 Add default config options.
+Merge selector into defualts.
 Make selected images to only support an image tag.
 Remove useless comments.
 Move contants to the top.
@@ -13,6 +14,11 @@ Refactor event listeners incl. their handlers.
 Fix isAnimating variable.
 Refactor animate() into methods and rename to calculate.
 Rename fakeElement.
+Reduce to 100 lines or less (without comments).
+
+-After all above-
+
+Refactor to annonymous const functions (like the kids today).
 
 */
 
