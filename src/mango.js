@@ -42,18 +42,18 @@ export default function (selector = '[data-mango]', config = {}) {
     // Save values into vars
     const { top, left, width, height } = element.getBoundingClientRect()
     // Clone the element
-    const fakeElement = element.cloneNode()
+    const clone = element.cloneNode()
     // Save the scrolled amounts into vars
-    const scrollTop = window.pageYOffset
-    const scrollLeft = window.pageXOffset
+    const scrollTop = window.pageYOffset || 0
+    const scrollLeft = window.pageXOffset || 0
     // Set custom style for the fake element
-    fakeElement.style.position = 'absolute'
-    fakeElement.style.top = `${ top + scrollTop }px`
-    fakeElement.style.left = `${ left + scrollLeft }px`
-    fakeElement.style.width = `${ width }px`
-    fakeElement.style.height = `${ height }px`
+    clone.style.position = 'absolute'
+    clone.style.top = `${ top + scrollTop }px`
+    clone.style.left = `${ left + scrollLeft }px`
+    clone.style.width = `${ width }px`
+    clone.style.height = `${ height }px`
     // Return the cloned element
-    return fakeElement
+    return clone
   }
 
   function wrap() {
