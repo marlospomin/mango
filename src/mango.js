@@ -39,15 +39,17 @@ export default function (selector = '[data-mango]', config = {}) {
   // Push default into config
   config = { ...defaultConfig, ...config }
 
+  // Load each image into images
+  const images = select()
+  // Save the created wrapper into the var
+  const wrapper = wrap()
+
   function select() {
     // Load all the images given selector
     const images = document.querySelectorAll(selector)
     // Return image collection
     return images
   }
-
-  // Load each image into images
-  const images = select()
 
   function clone(element) {
     // Save values into vars
@@ -75,9 +77,6 @@ export default function (selector = '[data-mango]', config = {}) {
     // Return the created overlay
     return wrapper
   }
-
-  // Save the created wrapper into the var
-  const wrapper = wrap()
 
   function trigger(event) {
     // Prevent default
