@@ -22,7 +22,18 @@ Refactor to annonymous const functions (like the kids today).
 
 */
 
-const defaultConfig = { /* Empty for now */}
+const defaultConfig = {
+/*
+
+-Options List-
+
+Margin.
+Background color.
+Selector.
+Interrupt keys.
+
+*/
+}
 
 export default function (selector = '[data-mango]', config = {}) {
   // Push default into config
