@@ -204,8 +204,8 @@ export default function (selector = '[data-mango]', config = {}) {
       left: 0, top: 0, right: 0, bottom: 0
     }
     // Set viewport vars
-    let viewportWidth = viewportWidth || container.width - 50 * 2
-    let viewportHeight = viewportHeight || container.height - 50 * 2
+    let viewportWidth = container.width - 50 * 2
+    let viewportHeight = container.height - 50 * 2
     // Set the zoom target
     const zoomTarget = origin
     // Save computed information
