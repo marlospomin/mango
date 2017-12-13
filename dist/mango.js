@@ -24,15 +24,17 @@
     // Push default into config
     config = _extends({}, defaultConfig, config);
 
+    // Load each image into images
+    var images = select();
+    // Save the created wrapper into the var
+    var wrapper = wrap();
+
     function select() {
       // Load all the images given selector
       var images = document.querySelectorAll(selector);
       // Return image collection
       return images;
     }
-
-    // Load each image into images
-    var images = select();
 
     function clone(element) {
       // Save values into vars
@@ -44,18 +46,18 @@
       // Clone the element
 
 
-      var fakeElement = element.cloneNode();
+      var clone = element.cloneNode();
       // Save the scrolled amounts into vars
-      var scrollTop = window.pageYOffset;
-      var scrollLeft = window.pageXOffset;
+      var scrollTop = window.pageYOffset || 0;
+      var scrollLeft = window.pageXOffset || 0;
       // Set custom style for the fake element
-      fakeElement.style.position = 'absolute';
-      fakeElement.style.top = top + scrollTop + 'px';
-      fakeElement.style.left = left + scrollLeft + 'px';
-      fakeElement.style.width = width + 'px';
-      fakeElement.style.height = height + 'px';
+      clone.style.position = 'absolute';
+      clone.style.top = top + scrollTop + 'px';
+      clone.style.left = left + scrollLeft + 'px';
+      clone.style.width = width + 'px';
+      clone.style.height = height + 'px';
       // Return the cloned element
-      return fakeElement;
+      return clone;
     }
 
     function wrap() {
@@ -66,9 +68,6 @@
       // Return the created overlay
       return wrapper;
     }
-
-    // Save the created wrapper into the var
-    var wrapper = wrap();
 
     function trigger(event) {
       // Prevent default
@@ -88,9 +87,9 @@
     function zoom(origin) {
       // If origin is not found break
       if (!origin) return;
-      // Save scrolltop value
+      // Save scrollTop value
       var scrollTop = window.pageYOffset || 0;
-      // Set control var
+      // Create control var
       var isAnimating = true;
       // Save zoomed image into var
       var zoomed = clone(origin);
@@ -98,10 +97,6 @@
       document.body.appendChild(wrapper);
       // Apply the clone
       document.body.appendChild(zoomed);
-
-      // zoomed.parentNode.insertBefore(wrapper, zoomed)
-      // wrapper.appendChild(zoomed)
-
       // Request animation event
       requestAnimationFrame(function () {
         document.body.classList.add('mango--open');
@@ -161,7 +156,7 @@
         timeout > 0 ? setTimeout(run, timeout) : run();
 
         function run() {
-          // If we are animating break -- Failing here
+          // If we are animating break
           if (isAnimating) return;
           // Set animation var
           isAnimating = true;
@@ -175,11 +170,9 @@
           remove = function remove() {
             // Set visibility of the original image
             origin.style.visibility = 'visible';
-            // Remove the fake element
-            // document.body.removeChild(zoomed)
+            // Remove the cloned element
             zoomed.remove();
             // Remove the wrapper
-            // document.body.removeChild(wrapper)
             wrapper.remove();
             // Remove classes
             zoomed.classList.remove('mango-image--open');
@@ -190,6 +183,9 @@
           };
           // Add animations to zoom out
           zoomed.addEventListener('transitionend', remove);
+          // Remove events
+          document.removeEventListener('keydown', keydown);
+          document.removeEventListener('scroll', scroll);
         }
       }
     }
@@ -200,8 +196,8 @@
         width: window.innerWidth, height: window.innerHeight,
         left: 0, top: 0, right: 0, bottom: 0
         // Set viewport vars
-      };var viewportWidth = viewportWidth || container.width - 5 * 2;
-      var viewportHeight = viewportHeight || container.height - 5 * 2;
+      };var viewportWidth = container.width - 50 * 2;
+      var viewportHeight = container.height - 50 * 2;
       // Set the zoom target
       var zoomTarget = origin;
       // Save computed information
@@ -215,19 +211,17 @@
           left = _zoomTarget$getBoundi.left,
           width = _zoomTarget$getBoundi.width,
           height = _zoomTarget$getBoundi.height;
-      // Set scales
+      // Get scale
 
 
       var scaleX = Math.min(naturalWidth, viewportWidth) / width;
       var scaleY = Math.min(naturalHeight, viewportHeight) / height;
-      // Set scale
       var scale = Math.min(scaleX, scaleY) || 1;
       // Set transform values
-      var translateX = (-left + (viewportWidth - width) / 2 + 5 + container.left) / scale;
-      var translateY = (-top + (viewportHeight - height) / 2 + 5 + container.top) / scale;
+      var translateX = (-left + (viewportWidth - width) / 2 + 50 + container.left) / scale;
+      var translateY = (-top + (viewportHeight - height) / 2 + 50 + container.top) / scale;
       // Transform
-      var transform = 'scale(' + scale + ') translate3d(' + translateX + 'px, ' + translateY + 'px, 0)';
-      // Style element
+      var transform = 'scale(' + scale + ') translate3d(' + translateX + 'px,\n       ' + translateY + 'px, 0)';
       zoomed.style.transform = transform;
     }
 
@@ -267,7 +261,7 @@
   Add margin options.
   Add data-src image.
   Add default config options.
-  Merge selector into defualts.
+  Merge selector into defaults.
   Make selected images to only support an image tag.
   Remove useless comments.
   Move contants to the top.
@@ -284,7 +278,18 @@
   
   */
 
-  var defaultConfig = {/* Empty for now */};
+  var defaultConfig = {
+    /*
+    
+    -Options List-
+    
+    Margin.
+    Background color.
+    Selector.
+    Interrupt keys.
+    
+    */
+  };
 
   module.exports = exports['default'];
 });
