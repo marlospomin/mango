@@ -194,8 +194,8 @@ export default function (selector = '[data-mango]', config = {}) {
       left: 0, top: 0, right: 0, bottom: 0
     }
     // Set viewport vars
-    let viewportWidth = viewportWidth || container.width - 5 * 2
-    let viewportHeight = viewportHeight || container.height - 5 * 2
+    let viewportWidth = viewportWidth || container.width - 50 * 2
+    let viewportHeight = viewportHeight || container.height - 50 * 2
     // Set the zoom target
     const zoomTarget = origin
     // Save computed information
@@ -208,8 +208,8 @@ export default function (selector = '[data-mango]', config = {}) {
     // Set scale
     const scale = Math.min(scaleX, scaleY) || 1
     // Set transform values
-    const translateX = (-left + (viewportWidth - width) / 2 + 5 + container.left) / scale
-    const translateY = (-top + (viewportHeight - height) / 2 + 5 + container.top) / scale
+    const translateX = (-left + (viewportWidth - width) / 2 + 50 + container.left) / scale
+    const translateY = (-top + (viewportHeight - height) / 2 + 50 + container.top) / scale
     // Transform
     const transform = `scale(${scale}) translate3d(${translateX}px, ${translateY}px, 0)`
     // Style element
