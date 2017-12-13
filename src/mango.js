@@ -167,11 +167,9 @@ export default function (selector = '[data-mango]', config = {}) {
         remove = function remove() {
           // Set visibility of the original image
           origin.style.visibility = 'visible'
-          // Remove the fake element
-          // document.body.removeChild(zoomed)
+          // Remove the cloned element
           zoomed.remove()
           // Remove the wrapper
-          // document.body.removeChild(wrapper)
           wrapper.remove()
           // Remove classes
           zoomed.classList.remove('mango-image--open')
