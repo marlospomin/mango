@@ -182,6 +182,9 @@ export default function (selector = '[data-mango]', config = {}) {
         }
         // Add animations to zoom out
         zoomed.addEventListener('transitionend', remove)
+        // Remove events
+        document.removeEventListener('keydown', keydown)
+        document.removeEventListener('scroll', scroll)
       }
     }
   }
