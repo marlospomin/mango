@@ -225,7 +225,7 @@ export default function (selector = '[data-mango]', config = {}) {
       // Add styles to each image
       image.classList.add('mango-image')
       // Trigger the zoom effect
-      image.addEventListener('click', () => {
+      image.addEventListener('click', (event) => {
         trigger(event)
       })
     })
