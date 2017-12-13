@@ -5,7 +5,7 @@
 Add margin options.
 Add data-src image.
 Add default config options.
-Merge selector into defualts.
+Merge selector into defaults.
 Make selected images to only support an image tag.
 Remove useless comments.
 Move contants to the top.
