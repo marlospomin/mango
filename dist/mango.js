@@ -237,7 +237,7 @@
         // Add styles to each image
         image.classList.add('mango-image');
         // Trigger the zoom effect
-        image.addEventListener('click', function () {
+        image.addEventListener('click', function (event) {
           trigger(event);
         });
       });
@@ -260,13 +260,29 @@
     return target;
   };
 
-  // Add default config
-  // Fix z-index issues
-  // Wrap image into wrapper
-  // Refactor animate
-  // Refactor out
-  // Refactor event listeners
-  // Refactor comments
+  /*
+  
+  -Refactor Notes-
+  
+  Add margin options.
+  Add data-src image.
+  Add default config options.
+  Merge selector into defualts.
+  Make selected images to only support an image tag.
+  Remove useless comments.
+  Move contants to the top.
+  Refactor zoom() function.
+  Refactor event listeners incl. their handlers.
+  Fix isAnimating variable.
+  Refactor animate() into methods and rename to calculate.
+  Rename fakeElement.
+  Reduce to 100 lines or less (without comments).
+  
+  -After all above-
+  
+  Refactor to annonymous const functions (like the kids today).
+  
+  */
 
   var defaultConfig = {/* Empty for now */};
 
