@@ -96,9 +96,9 @@ export default function (selector = '[data-mango]', config = {}) {
   function zoom(origin) {
     // If origin is not found break
     if (!origin) return
-    // Save scrolltop value
+    // Save scrollTop value
     const scrollTop = window.pageYOffset || 0
-    // Set control var
+    // Create control var
     let isAnimating = true
     // Save zoomed image into var
     const zoomed = clone(origin)
@@ -163,7 +163,7 @@ export default function (selector = '[data-mango]', config = {}) {
       timeout > 0 ? setTimeout(run, timeout) : run()
 
       function run() {
-        // If we are animating break -- Failing here
+        // If we are animating break
         if (isAnimating) return
         // Set animation var
         isAnimating = true
@@ -212,10 +212,9 @@ export default function (selector = '[data-mango]', config = {}) {
     const { naturalWidth = viewportWidth,
        naturalHeight = viewportHeight } = zoomTarget
     const { top, left, width, height } = zoomTarget.getBoundingClientRect()
-    // Set scales
+    // Get scale
     const scaleX = Math.min(naturalWidth, viewportWidth) / width
     const scaleY = Math.min(naturalHeight, viewportHeight) / height
-    // Set scale
     const scale = Math.min(scaleX, scaleY) || 1
     // Set transform values
     const translateX = (-left + (viewportWidth - width) / 2 + 50 + container.left) / scale
