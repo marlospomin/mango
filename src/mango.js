@@ -96,10 +96,6 @@ export default function (selector = '[data-mango]', config = {}) {
     document.body.appendChild(wrapper)
     // Apply the clone
     document.body.appendChild(zoomed)
-
-    // zoomed.parentNode.insertBefore(wrapper, zoomed)
-    // wrapper.appendChild(zoomed)
-
     // Request animation event
     requestAnimationFrame(() => {
       document.body.classList.add('mango--open')
