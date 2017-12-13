@@ -217,11 +217,13 @@ export default function (selector = '[data-mango]', config = {}) {
     const scaleY = Math.min(naturalHeight, viewportHeight) / height
     const scale = Math.min(scaleX, scaleY) || 1
     // Set transform values
-    const translateX = (-left + (viewportWidth - width) / 2 + 50 + container.left) / scale
-    const translateY = (-top + (viewportHeight - height) / 2 + 50 + container.top) / scale
+    const translateX = (-left + (viewportWidth - width) / 2 + 50 +
+     container.left) / scale
+    const translateY = (-top + (viewportHeight - height) / 2 + 50 +
+     container.top) / scale
     // Transform
-    const transform = `scale(${scale}) translate3d(${translateX}px, ${translateY}px, 0)`
-    // Style element
+    const transform = `scale(${scale}) translate3d(${translateX}px,
+       ${translateY}px, 0)`
     zoomed.style.transform = transform
   }
 
