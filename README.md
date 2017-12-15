@@ -53,7 +53,25 @@ mango();
 
 ## Configuring
 
-**Not available at this time.**
+Pass options to mango like the example below:
+
+``` js
+// Custom options
+mango({
+  selector: '[data-mango]', // data-mango
+  background: 'white', // background-color
+  margin: 50 // 50px
+});
+```
+### Supported parameters
+
+* ```selector``` *type* ```string``` *default* ```[data-mango]```.
+
+* ```background``` *type* ```string``` *default* ```white```.
+
+* ```margin``` *type* ```integer``` *default* ```50```.
+
+* ```interruptKeys``` *type* ```array``` *default* ```[27, 37, 39]```.
 
 ## Running Tasks
 
