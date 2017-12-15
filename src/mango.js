@@ -19,7 +19,7 @@ export default function (config = {}) {
   // Save the created wrapper into the var
   const wrapper = wrap()
   // Create a control var
-  let isAnimating = true
+  let isAnimating = false
 
   function select() {
     // Load all the images given selector
@@ -75,6 +75,8 @@ export default function (config = {}) {
   function zoom(origin) {
     // If origin is not found break
     if (!origin) return
+    // Set control var
+    isAnimating = true
     // Save the current scrollTop value
     const scrollTop = window.pageYOffset || 0
     // Save zoomed image into var
@@ -93,8 +95,6 @@ export default function (config = {}) {
     zoomed.classList.add('mango-image--open')
     // Remove handler
     let remove = function remove() {
-      // Set control var
-      isAnimating = true
       // Add events
       zoomed.addEventListener('click', () => {
         isAnimating = false
