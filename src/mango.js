@@ -1,27 +1,3 @@
-/*
-
--Refactor Notes-
-
-Add margin options. - OK
-Add data-src image.
-Add default config options. - OK
-Merge selector into defaults. - OK
-Make selected images to only support an image tag.
-Remove useless comments. - OK
-Move contants to the top.
-Refactor zoom() function.
-Refactor event listeners incl. their handlers.
-Fix isAnimating variable.
-Refactor animate() into methods and rename to calculate.
-Rename fakeElement. - OK
-Reduce to 100 lines or less (without comments).
-
--After all above-
-
-Refactor to annonymous const functions (like the kids today).
-
-*/
-
 const defaultConfig = {
   // Default selector
   selector: '[data-mango]',
