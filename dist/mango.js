@@ -18,16 +18,23 @@
   });
 
   exports.default = function () {
-    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '[data-mango]';
-    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     // Push default into config
-    config = _extends({}, defaultConfig, config);
+    var _defaultConfig$config = _extends({}, defaultConfig, config),
+        selector = _defaultConfig$config.selector,
+        background = _defaultConfig$config.background,
+        margin = _defaultConfig$config.margin,
+        interruptKeys = _defaultConfig$config.interruptKeys;
 
     // Load each image into images
+
+
     var images = select();
     // Save the created wrapper into the var
     var wrapper = wrap();
+    // Create a control var
+    var isAnimating = false;
 
     function select() {
       // Load all the images given selector
@@ -65,6 +72,8 @@
       var wrapper = document.createElement('div');
       // Style the overlay
       wrapper.classList.add('mango-overlay');
+      // Style the background color
+      wrapper.style.backgroundColor = background;
       // Return the created overlay
       return wrapper;
     }
@@ -76,7 +85,7 @@
       if (event.target) {
         // Save the element who did that
         var _origin = event.target;
-        // Trigger zoom-in
+        // Zoom in
         zoom(_origin);
       } else {
         // Zoom out
@@ -87,10 +96,10 @@
     function zoom(origin) {
       // If origin is not found break
       if (!origin) return;
-      // Save scrollTop value
+      // Set control var
+      isAnimating = true;
+      // Save the current scrollTop value
       var scrollTop = window.pageYOffset || 0;
-      // Create control var
-      var isAnimating = true;
       // Save zoomed image into var
       var zoomed = clone(origin);
       // Apply the overlay
@@ -107,16 +116,14 @@
       zoomed.classList.add('mango-image--open');
       // Remove handler
       var remove = function remove() {
-        // Set control var
-        isAnimating = true;
-        // Add zoom-out events
+        // Add events
         zoomed.addEventListener('click', function () {
           isAnimating = false;
           out();
         });
         window.addEventListener('resize', function () {
           isAnimating = false;
-          out(20);
+          out();
         });
         wrapper.addEventListener('click', function () {
           isAnimating = false;
@@ -127,7 +134,7 @@
       };
       // Keydown handler
       var keydown = function remove() {
-        if ([27, 37, 39].includes(event.keyCode)) {
+        if (interruptKeys.includes(event.keyCode)) {
           isAnimating = false;
           out();
         }
@@ -146,8 +153,9 @@
       zoomed.addEventListener('transitionend', remove);
       document.addEventListener('keydown', keydown);
       document.addEventListener('scroll', scroll);
-      // Animate transitions
-      animate(origin, zoomed);
+      // Calculte and set transform
+      zoomed.style.transform = calculate(origin);
+
       // Zoom out function
       function out() {
         var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
@@ -158,11 +166,11 @@
         function run() {
           // If we are animating break
           if (isAnimating) return;
-          // Set animation var
+          // Set control var
           isAnimating = true;
           // Remove class from body
           document.body.classList.remove('mango--open');
-          // De transform the element
+          // De-transform the element
           zoomed.style.transform = 'none';
           // Remove event listener from click
           zoomed.removeEventListener('click', out());
@@ -170,13 +178,12 @@
           remove = function remove() {
             // Set visibility of the original image
             origin.style.visibility = 'visible';
-            // Remove the cloned element
+            // Remove the cloned element and the wrapper
             zoomed.remove();
-            // Remove the wrapper
             wrapper.remove();
             // Remove classes
             zoomed.classList.remove('mango-image--open');
-            // Set animation var
+            // Set control var
             isAnimating = false;
             // Remove event itself
             zoomed.removeEventListener('transitionend', remove);
@@ -190,14 +197,14 @@
       }
     }
 
-    function animate(origin, zoomed) {
+    function calculate(origin) {
       // Create a container
       var container = {
         width: window.innerWidth, height: window.innerHeight,
         left: 0, top: 0, right: 0, bottom: 0
         // Set viewport vars
-      };var viewportWidth = container.width - 50 * 2;
-      var viewportHeight = container.height - 50 * 2;
+      };var viewportWidth = container.width - margin * 2;
+      var viewportHeight = container.height - margin * 2;
       // Set the zoom target
       var zoomTarget = origin;
       // Save computed information
@@ -218,11 +225,12 @@
       var scaleY = Math.min(naturalHeight, viewportHeight) / height;
       var scale = Math.min(scaleX, scaleY) || 1;
       // Set transform values
-      var translateX = (-left + (viewportWidth - width) / 2 + 50 + container.left) / scale;
-      var translateY = (-top + (viewportHeight - height) / 2 + 50 + container.top) / scale;
-      // Transform
+      var translateX = (-left + (viewportWidth - width) / 2 + margin + container.left) / scale;
+      var translateY = (-top + (viewportHeight - height) / 2 + margin + container.top) / scale;
+      // Apply transform
       var transform = 'scale(' + scale + ') translate3d(' + translateX + 'px,\n       ' + translateY + 'px, 0)';
-      zoomed.style.transform = transform;
+      // Return transform
+      return transform;
     }
 
     function run(images) {
@@ -254,41 +262,15 @@
     return target;
   };
 
-  /*
-  
-  -Refactor Notes-
-  
-  Add margin options.
-  Add data-src image.
-  Add default config options.
-  Merge selector into defaults.
-  Make selected images to only support an image tag.
-  Remove useless comments.
-  Move contants to the top.
-  Refactor zoom() function.
-  Refactor event listeners incl. their handlers.
-  Fix isAnimating variable.
-  Refactor animate() into methods and rename to calculate.
-  Rename fakeElement.
-  Reduce to 100 lines or less (without comments).
-  
-  -After all above-
-  
-  Refactor to annonymous const functions (like the kids today).
-  
-  */
-
   var defaultConfig = {
-    /*
-    
-    -Options List-
-    
-    Margin.
-    Background color.
-    Selector.
-    Interrupt keys.
-    
-    */
+    // Default selector
+    selector: '[data-mango]',
+    // Default background color
+    background: 'white',
+    // Default margin
+    margin: 50,
+    // Default cancel keys
+    interruptKeys: [27, 37, 39]
   };
 
   module.exports = exports['default'];
