@@ -13,8 +13,10 @@ Refactor zoom() function.
 Refactor event listeners incl. their handlers.
 Fix isAnimating variable.
 Refactor animate() into methods and rename to calculate.
-Rename fakeElement.
+Rename fakeElement. - OK
 Reduce to 100 lines or less (without comments).
+
+Move style.translate to zoom() and have animate() reutn transform. - OK
 
 -After all above-
 
@@ -41,8 +43,12 @@ export default function (selector = '[data-mango]', config = {}) {
 
   // Load each image into images
   const images = select()
-  // Save the created wrapper into the var
+  // Save the created wrapper
   const wrapper = wrap()
+  // Save the scrollTop value
+  const scrollTop = window.pageYOffset || 0
+  // Create a control var
+  let isAnimating = true
 
   function select() {
     // Load all the images given selector
@@ -57,7 +63,6 @@ export default function (selector = '[data-mango]', config = {}) {
     // Clone the element
     const clone = element.cloneNode()
     // Save the scrolled amounts into vars
-    const scrollTop = window.pageYOffset || 0
     const scrollLeft = window.pageXOffset || 0
     // Set custom style for the fake element
     clone.style.position = 'absolute'
@@ -96,10 +101,6 @@ export default function (selector = '[data-mango]', config = {}) {
   function zoom(origin) {
     // If origin is not found break
     if (!origin) return
-    // Save scrollTop value
-    const scrollTop = window.pageYOffset || 0
-    // Create control var
-    let isAnimating = true
     // Save zoomed image into var
     const zoomed = clone(origin)
     // Apply the overlay
@@ -156,7 +157,7 @@ export default function (selector = '[data-mango]', config = {}) {
     document.addEventListener('keydown', keydown)
     document.addEventListener('scroll', scroll)
     // Animate transitions
-    animate(origin, zoomed)
+    zoomed.style.transform = calculate(origin)
     // Zoom out function
     function out(timeout = 0) {
       // If timeout is more than 0 time it out else zoom out
@@ -197,7 +198,7 @@ export default function (selector = '[data-mango]', config = {}) {
     }
   }
 
-  function animate(origin, zoomed) {
+  function calculate(origin) {
     // Create a container
     const container = {
       width: window.innerWidth, height: window.innerHeight,
@@ -221,10 +222,11 @@ export default function (selector = '[data-mango]', config = {}) {
      container.left) / scale
     const translateY = (-top + (viewportHeight - height) / 2 + 50 +
      container.top) / scale
-    // Transform
+    // Transform target
     const transform = `scale(${scale}) translate3d(${translateX}px,
        ${translateY}px, 0)`
-    zoomed.style.transform = transform
+    // Return the computed value
+    return transform
   }
 
   function run(images) {
