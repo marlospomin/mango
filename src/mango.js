@@ -138,7 +138,11 @@ export default function (config = {}) {
     // Zoom out function
     function out(timeout = 0) {
       // If timeout is more than 0 time it out else zoom out
-      timeout > 0 ? setTimeout(run, timeout) : run()
+      if (timeout > 0) {
+        setTimeout(run, timeout)
+      } else {
+        run()
+      }
 
       function run() {
         // If we are animating break
