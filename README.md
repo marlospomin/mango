@@ -1,4 +1,4 @@
-# Mango
+# Mango.js
 
 > A small medium like javascript library to zoom your images.
 
@@ -99,6 +99,7 @@ $ ...
 * [ ] Refactor animate().
 * [ ] Reduce to 100 lines or less (without comments).
 * [ ] Refactor to arrow functions.
+* [ ] Write tests.
 
 **Legend**: Checked boxes mean *__partial__* completion, checked and ~~crossed~~ items mean they're *__fully__* working.
 
