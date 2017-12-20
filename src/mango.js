@@ -133,8 +133,16 @@ export default function (config = {}) {
     document.addEventListener('keydown', keydown)
     document.addEventListener('scroll', scroll)
     // Calculte and set transform
-    zoomed.style.transform = calculate(origin)
-
+    if (origin.dataset.src) {
+      // Load high-res image
+      zoomed.src = zoomed.dataset.src
+      // Transform
+      const interval = setInterval(() => { clearInterval(interval);
+         zoomed.style.transform = calculate(zoomed) }, 20)
+    } else {
+      // Fallback
+      zoomed.style.transform = calculate(origin)
+    }
     // Zoom out function
     function out(timeout = 0) {
       // If timeout is more than 0 time it out else zoom out
