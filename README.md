@@ -90,13 +90,13 @@ $ ...
 ### Todo List
 
 * [ ] Make a better example page.
-* [ ] Add data-src image option.
+* [x] Add data-src image option.
 * [ ] Make selected images only support an image tag.
 * [ ] Refactor zoom().
 * [ ] Refactor event listeners.
 * [ ] Refactor handlers
 * [ ] Fix isAnimating.
-* [ ] Refactor animate().
+* [x] Refactor animate().
 * [ ] Reduce to 100 lines or less (without comments).
 * [ ] Refactor to arrow functions.
 * [ ] Write tests.
