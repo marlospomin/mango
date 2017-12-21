@@ -35,7 +35,7 @@ Alternatively you can include a minified version of mango (or the source code, u
 Add ```data-mango``` to your images as it follows below.
 
 ``` html
-<img data-mango src="http://example.com" alt="">...</img>
+<img data-mango src="path/to/image/image.jpg" alt="">...</img>
 ```
 
 Add mango ```css``` to your document.
@@ -49,6 +49,12 @@ Call mango anywhere in your code:
 ``` js
 // Call me
 mango();
+```
+
+Additionally add a high-res image as a ```data-src``` attribute, like the example below:
+
+``` html
+<img data-mango src="" data-src="path/to/image/high.jpg" alt="">...</img>
 ```
 
 ## Configuring
