@@ -134,11 +134,36 @@ export default function (config = {}) {
     document.addEventListener('scroll', scroll)
     // Calculte and set transform
     if (origin.dataset.src) {
-      // Load high-res image
-      zoomed.src = zoomed.dataset.src
-      // Transform
-      const interval = setInterval(() => { clearInterval(interval);
-         zoomed.style.transform = calculate(zoomed) }, 20)
+      // Fetchs an image
+      function fetchImage(url) {
+        return new Promise((resolve, reject) => {
+          // Create a new image
+          const image = new Image()
+          // Load the src
+          image.src = url
+          // Handle errors
+          image.onload = resolve
+          image.onerror = reject
+        })
+      }
+      // Preloads an image
+      function preloadImage(image) {
+        // Save the src
+        const src = image.dataset.src
+        // Return to those 2 methods or fallback
+        return fetchImage(src).then(() => applyTransform(image, src)).catch(
+          () => zoomed.style.transform = calculate(origin))
+      }
+      // Apply the transform
+      function applyTransform(image, src) {
+        // Load src into the image
+        image.src = src
+        // Apply the real transform
+        const interval = setInterval(() => { clearInterval(interval)
+          image.style.transform = calculate(image) }, 20)
+      }
+      // Run the preload
+      preloadImage(zoomed)
     } else {
       // Fallback
       zoomed.style.transform = calculate(origin)
