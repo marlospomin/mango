@@ -154,14 +154,62 @@
       document.addEventListener('keydown', keydown);
       document.addEventListener('scroll', scroll);
       // Calculte and set transform
-      zoomed.style.transform = calculate(origin);
+      if (origin.dataset.src) {
+        // Fetchs an image
+        var fetchImage = function fetchImage(url) {
+          return new Promise(function (resolve, reject) {
+            // Create a new image
+            var image = new Image();
+            // Load the src
+            image.src = url;
+            // Handle errors
+            image.onload = resolve;
+            image.onerror = reject;
+          });
+        };
+        // Preloads an image
 
+
+        var preloadImage = function preloadImage(image) {
+          // Save the src
+          var src = image.dataset.src;
+          // Return to those 2 methods or fallback
+          return fetchImage(src).then(function () {
+            return applyTransform(image, src);
+          }).catch(function () {
+            return zoomed.style.transform = calculate(origin);
+          });
+        };
+        // Apply the transform
+
+
+        var applyTransform = function applyTransform(image, src) {
+          // Load src into the image
+          image.src = src;
+          // Apply the real transform
+          var interval = setInterval(function () {
+            clearInterval(interval);
+            image.style.transform = calculate(image);
+          }, 20);
+        };
+        // Run the preload
+
+
+        preloadImage(zoomed);
+      } else {
+        // Fallback
+        zoomed.style.transform = calculate(origin);
+      }
       // Zoom out function
       function out() {
         var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
         // If timeout is more than 0 time it out else zoom out
-        timeout > 0 ? setTimeout(run, timeout) : run();
+        if (timeout > 0) {
+          setTimeout(run, timeout);
+        } else {
+          run();
+        }
 
         function run() {
           // If we are animating break
