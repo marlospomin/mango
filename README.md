@@ -111,7 +111,7 @@ $ ...
 
 ## Contributing
 
-If you feel like smoothie is missed something please do send a message or, alternatively make a pull request or even open an issue using an appropriate label and we will go from there.
+If you feel like I missed something please do send me a message or, alternatively make a pull request/open an issue and we will go from there.
 
 ## License
 
