@@ -34,10 +34,33 @@ Add ```data-mango``` to your images as it follows below.
 <img data-mango src="path/to/image/image.jpg" alt="">...</img>
 ```
 
-Add mango ```css``` to your document.
+Add mango **required** ```css``` to your document/styles.
 
-```html
-<link rel="stylesheet" href="/path/to/file/mango.css">
+```css
+.mango-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  transition: opacity 0.2s ease;
+}
+
+.mango-image--open {
+  position: relative;
+  cursor: zoom-out !important;
+}
+
+.mango--open .mango-overlay {
+  cursor: zoom-out;
+  opacity: 1;
+}
+
+.mango-image {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
 ```
 
 Call mango anywhere in your code:
