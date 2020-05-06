@@ -1,59 +1,51 @@
-# Mango.js
+# Mango
 
-> A small medium like javascript library to zoom your images.
+> A small medium-like javascript library to zoom your images.
 
 ## Install
 
-``` bash
+```bash
 # Using npm
-npm install mango-js
+npm install @marlospomin/mango
 
 # Using yarn
-yarn add mango-js
+yarn add @marlospomin/mango
 ```
 
 Now include mango and you should be good to go.
 
-``` js
+```js
 // es6
-import mango from 'mango'
+import mango from '@marlospomin/mango'
 
 // commonjs
-const mango = require('mango');
-```
-
-Alternatively you can include a minified version of mango (or the source code, up to you) via direct file or using our **CDN** link.
-
-``` html
-<body>
-  <script src="https://unpkg.com/mango-js"></script>
-</body>
+const mango = require('@marlospomin/mango')
 ```
 
 ## Usage
 
 Add ```data-mango``` to your images as it follows below.
 
-``` html
+```html
 <img data-mango src="path/to/image/image.jpg" alt="">...</img>
 ```
 
 Add mango ```css``` to your document.
 
-``` html
+```html
 <link rel="stylesheet" href="/path/to/file/mango.css">
 ```
 
 Call mango anywhere in your code:
 
-``` js
+```js
 // Call me
-mango();
+mango()
 ```
 
 Additionally add a high-res image as a ```data-src``` attribute, like the example below:
 
-``` html
+```html
 <img data-mango src="" data-src="path/to/image/high.jpg" alt="">...</img>
 ```
 
@@ -61,14 +53,15 @@ Additionally add a high-res image as a ```data-src``` attribute, like the exampl
 
 Pass options to mango like the example below:
 
-``` js
+```js
 // Custom options
 mango({
-  selector: '[data-mango]', // data-mango
-  background: 'white', // background-color
-  margin: 50 // 50px
-});
+  selector: '[data-mango]',
+  background: 'white',
+  margin: 50
+})
 ```
+
 ### Supported parameters
 
 * ```selector``` *type* ```string``` *default* ```[data-mango]```.
@@ -81,35 +74,19 @@ mango({
 
 ## Running Tasks
 
-You can run tasks with ```yarn``` or ```npm``` using the following commands:
+You can run tasks with ```yarn``` command like the example below:
 
-``` bash
+```bash
 # Build task
 $ yarn build
 
-# etc.
-$ ...
+# Lint task
+$ yarn lint
 ```
-
-## Roadmap
-
-### Todo List
-
-* [ ] Make a better example page.
-* [ ] Make selected images only support an image tag.
-* [ ] Refactor zoom().
-* [ ] Refactor event listeners.
-* [ ] Refactor handlers.
-* [ ] Fix isAnimating.
-* [ ] Reduce to 150 lines or less (without comments).
-* [ ] Refactor to arrow functions.
-* [ ] Write tests.
-
-**Legend**: Checked boxes mean *__partial__* completion, checked and ~~crossed~~ items mean they're *__fully__* working.
 
 ## Contributing
 
-If you feel like I missed something please do send me a message or, alternatively make a pull request/open an issue and we will go from there.
+Create a pull request or open an issue and we will go from there.
 
 ## License
 
