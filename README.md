@@ -2,6 +2,10 @@
 
 > A small medium-like javascript library to zoom your images.
 
+## Demo
+
+Feel free to check the demo on CodePen [here](https://codepen.io/marlospomin/full/YzyexoX).
+
 ## Install
 
 ```bash
