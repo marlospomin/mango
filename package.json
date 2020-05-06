@@ -1,7 +1,7 @@
 {
-  "name": "mango-js",
-  "description": "A small medium like javascript library to zoom your images.",
-  "version": "1.0.2",
+  "name": "@marlospomin/mango",
+  "description": "A small medium-like javascript library to zoom your images.",
+  "version": "1.0.3",
   "author": "Marlos Pomin",
   "files": [
     "dist/"
@@ -19,35 +19,13 @@
   "main": "dist/mango.js",
   "repository": "marlospomin/mango",
   "scripts": {
-    "gulp": "gulp",
-    "build": "gulp build",
-    "reload": "gulp reload"
+    "build": "esbuild --bundle src/index.js --outfile=dist/mango.js --minify",
+    "precommit": "yarn lint",
+    "prepublish": "yarn build",
+    "lint": "eslint --ext .js --ignore-path .gitignore src"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.3",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "chai": "^4.1.2",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglifyjs": "^0.6.2",
-    "karma": "^1.7.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.1",
-    "karma-mocha": "^1.3.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-phantomjs-shim": "^1.5.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "^0.0.32",
-    "karma-webpack": "^2.0.13",
-    "mocha": "^4.0.1",
-    "phantomjs-prebuilt": "^2.1.16",
-    "webpack": "^4.0.1"
+    "esbuild": "^0.2.3",
+    "eslint": "^6.8.0"
   }
 }
