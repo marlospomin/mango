@@ -1,7 +1,7 @@
 {
   "name": "@marlospomin/mango",
   "description": "A small medium-like javascript library to zoom your images.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Marlos Pomin",
   "files": [
     "dist/"
